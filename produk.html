@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - IDEKU | Custom Kaos & Jersey</title>
+    <meta name="description" content="Lihat produk custom kaos, jersey sepak bola, basket, baseball dari IDEKU. Size chart lengkap dan pilihan bahan berkualitas.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: #111; background: #fff; -webkit-font-smoothing: antialiased; }
+
+        /* Nav */
+        nav { background: rgba(255,255,255,.97); box-shadow: 0 1px 24px rgba(0,0,0,.06); }
+        .nav-lnk { font-family: 'Syne', sans-serif; font-weight: 600; font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; position: relative; text-decoration: none; color: #6b6b6b; transition: color .25s; }
+        .nav-lnk::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #E84E1B; transition: width .3s; }
+        .nav-lnk:hover::after, .nav-lnk.act::after { width: 100%; }
+        .nav-lnk.act { color: #E84E1B; }
+
+        /* Hero */
+        .page-hero { background: #111; padding: 130px 0 72px; }
+
+        /* Section label */
+        .lbl { font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #E84E1B; display: flex; align-items: center; gap: 10px; }
+        .lbl::before { content: ''; display: block; width: 28px; height: 2px; background: #E84E1B; }
+
+        /* Product cards grid */
+        .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #e5e7eb; }
+        @media(max-width:1024px){ .prod-grid { grid-template-columns: repeat(2,1fr); } }
+        @media(max-width:580px){ .prod-grid { grid-template-columns: 1fr; } }
+
+        .prod-card { background: #fff; padding: 36px 32px; position: relative; overflow: hidden; transition: background .3s; }
+        .prod-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: #E84E1B; transition: height .4s ease; }
+        .prod-card:hover { background: #FBF8F4; }
+        .prod-card:hover::before { height: 100%; }
+        .prod-ic-wrap { width: 64px; height: 64px; background: rgba(232,78,27,.07); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: background .3s; }
+        .prod-card:hover .prod-ic-wrap { background: rgba(232,78,27,.13); }
+        .prod-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; margin-bottom: 10px; }
+        .prod-desc { color: #6b6b6b; font-size: .85rem; line-height: 1.7; font-weight: 300; margin-bottom: 18px; }
+        .prod-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+        .prod-tag { font-family: 'Syne', sans-serif; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; border: 1px solid #e5e7eb; color: #6b6b6b; padding: 4px 10px; }
+        .prod-link { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; color: #E84E1B; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap .25s; }
+        .prod-link:hover { gap: 12px; }
+        .prod-corner { position: absolute; bottom: 0; right: 0; width: 48px; height: 48px; background: #FBF8F4; clip-path: polygon(100% 0, 100% 100%, 0 100%); transition: background .3s; }
+        .prod-card:hover .prod-corner { background: #f0ebe3; }
+
+        /* CTA card */
+        .prod-cta { background: #111; padding: 36px 32px; position: relative; overflow: hidden; }
+
+        /* Btn */
+        .btn-e { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; background: #E84E1B; color: #fff; padding: 13px 28px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+        .btn-e:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,78,27,.36); }
+
+        /* Size chart section */
+        .size-sec { background: #FBF8F4; padding: 80px 0; }
+
+        /* Tab buttons */
+        .tab-btn { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .7rem; letter-spacing: .13em; text-transform: uppercase; padding: 10px 20px; border: 1px solid #e5e7eb; background: #fff; color: #6b6b6b; cursor: pointer; transition: all .25s; }
+        .tab-btn:hover { border-color: #E84E1B; color: #E84E1B; }
+        .tab-btn.active { background: #E84E1B; color: #fff; border-color: #E84E1B; }
+
+        /* Table */
+        .size-table { width: 100%; border-collapse: collapse; }
+        .size-table th { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; background: #111; color: #fff; padding: 14px 18px; text-align: center; }
+        .size-table td { border-bottom: 1px solid #f0f0f0; padding: 13px 18px; text-align: center; font-size: .875rem; font-weight: 300; color: #444; transition: background .2s; }
+        .size-table tr:hover td { background: #FBF8F4; }
+        .size-table td:first-child { font-family: 'Syne', sans-serif; font-weight: 700; color: #111; font-size: .82rem; }
+
+        /* Tab panels */
+        .tab-panel { display: none; }
+        .tab-panel.show { display: block; }
+
+        /* Reveal */
+        .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+        .rv.in { opacity: 1; transform: none; }
+        .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+        .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+        /* Mobile menu */
+        #mob-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .35s ease, opacity .35s ease; }
+        #mob-menu.open { max-height: 380px; opacity: 1; }
+
+        /* WA float */
+        .wa-f { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+        .wa-f a { width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(37,211,102,.42); transition: transform .25s; text-decoration: none; animation: wa-pulse 3s ease-in-out infinite; }
+        .wa-f a:hover { transform: scale(1.1); }
+        @keyframes wa-pulse { 0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,.42); } 50% { box-shadow: 0 4px 36px rgba(37,211,102,.68); } }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center" style="height:72px;">
+            <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+                <div style="width:32px;height:32px;background:#E84E1B;clip-path:polygon(0 0,100% 0,100% 76%,76% 100%,0 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="fas fa-tshirt text-white" style="font-size:.72rem;"></i>
+                </div>
+                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:#111;">IDEKU</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="nav-lnk">Beranda</a>
+                <a href="produk.html" class="nav-lnk act">Produk</a>
+                <a href="kontak.html" class="nav-lnk">Kontak</a>
+                <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="font-size:.68rem;padding:9px 18px;">
+                    <i class="fab fa-whatsapp"></i>Chat
+                </a>
+            </div>
+            <button id="ham" class="md:hidden flex flex-col gap-1.5 p-2 border-0 bg-transparent cursor-pointer">
+                <span style="display:block;width:24px;height:2px;background:#111;"></span>
+                <span style="display:block;width:24px;height:2px;background:#111;"></span>
+                <span style="display:block;width:16px;height:2px;background:#111;"></span>
+            </button>
+        </div>
+    </div>
+    <div id="mob-menu" style="background:#fff;border-top:1px solid #f0f0f0;">
+        <div class="px-6 py-5">
+            <a href="index.html" style="display:block;font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#6b6b6b;padding:11px 0;text-decoration:none;">Beranda</a>
+            <a href="produk.html" style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#E84E1B;padding:11px 0;text-decoration:none;">Produk</a>
+            <a href="kontak.html" style="display:block;font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#6b6b6b;padding:11px 0;text-decoration:none;">Kontak</a>
+            <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="margin-top:16px;justify-content:center;width:100%;">
+                <i class="fab fa-whatsapp"></i> Chat WhatsApp
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero" style="background:#111;background-image:radial-gradient(ellipse at 80% 50%,rgba(232,78,27,.12) 0%,transparent 60%);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="lbl mb-5" style="color:#E84E1B;">Produk Kami</div>
+        <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,6vw,4.5rem);color:#fff;letter-spacing:-.025em;line-height:1.05;margin-bottom:16px;">
+            Custom Pakaian<br>Sesuai Keinginan Anda
+        </h1>
+        <p style="color:rgba(255,255,255,.45);font-size:1rem;font-weight:300;max-width:480px;line-height:1.8;">
+            Pilih dari berbagai jenis pakaian custom dengan bahan berkualitas. Bisa juga request desain khusus!
+        </p>
+    </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section style="background:#fff;padding:72px 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="prod-grid">
+            <!-- Kaos -->
+            <div class="prod-card rv">
+                <div class="prod-ic-wrap"><i class="fas fa-tshirt" style="font-size:1.6rem;color:#E84E1B;"></i></div>
+                <h3 class="prod-name">Kaos / T-Shirt</h3>
+                <p class="prod-desc">Kaos custom dengan pilihan bahan cotton dan polyester. Cetak DTF full color, tahan lama.</p>
+                <div class="prod-tags">
+                    <span class="prod-tag">Cotton Combed 30s</span>
+                    <span class="prod-tag">Cotton Combed 24s</span>
+                    <span class="prod-tag">Cotton Combed 20s</span>
+                    <span class="prod-tag">Polyester</span>
+                </div>
+                <a href="#size-kaos" class="prod-link">Lihat Size Chart <i class="fas fa-arrow-down" style="font-size:.62rem;"></i></a>
+                <div class="prod-corner"></div>
+            </div>
+            <!-- Long Sleeve -->
+            <div class="prod-card rv d1">
+                <div class="prod-ic-wrap"><i class="fas fa-user-tie" style="font-size:1.6rem;color:#E84E1B;"></i></div>
+                <h3 class="prod-name">Kaos Lengan Panjang</h3>
+                <p class="prod-desc">Long sleeve shirts dengan bahan nyaman dan tahan lama. Ideal untuk brand streetwear.</p>
+                <div class="prod-tags">
+                    <span class="prod-tag">Cotton Combed 30s</span>
+                    <span class="prod-tag">Cotton Combed 24s</span>
+                    <span class="prod-tag">Polyester</span>
+                    <span class="prod-tag">Cotton-Poly Mix</span>
+                </div>
+                <a href="#size-jersey" class="prod-link">Lihat Size Chart <i class="fas fa-arrow-down" style="font-size:.62rem;"></i></a>
+                <div class="prod-corner"></div>
+            </div>
+            <!-- Jersey Bola -->
+            <div class="prod-card rv d2">
+                <div class="prod-ic-wrap"><i class="fas fa-futbol" style="font-size:1.6rem;color:#E84E1B;"></i></div>
+                <h3 class="prod-name">Jersey Sepak Bola</h3>
+                <p class="prod-desc">Jersey futsal/sepak bola full printing sublim. Bahan dry-fit breathable ultra ringan.</p>
+                <div class="prod-tags">
+                    <span class="prod-tag">Polyester Dry-Fit</span>
+                    <span class="prod-tag">Polyester Combed</span>
+                    <span class="prod-tag">V-Neck / Round Neck</span>
+                    <span class="prod-tag">Full Print Sublim</span>
+                </div>
+                <a href="#size-jersey" class="prod-link">Lihat Size Chart <i class="fas fa-arrow-down" style="font-size:.62rem;"></i></a>
+                <div class="prod-corner"></div>
+            </div>
+            <!-- Jersey Basket -->
+            <div class="prod-card rv">
+                <div class="prod-ic-wrap"><i class="fas fa-basketball-ball" style="font-size:1.6rem;color:#E84E1B;"></i></div>
+                <h3 class="prod-name">Jersey Basket</h3>
+                <p class="prod-desc">Jersey basket model tank top atau lengan pendek. Potongan athletic, desain penuh custom.</p>
+                <div class="prod-tags">
+                    <span class="prod-tag">Polyester Dry-Fit</span>
+                    <span class="prod-tag">Polyester Milano</span>
+                    <span class="prod-tag">Tank Top / Sleeveless</span>
+                    <span class="prod-tag">Full Custom Design</span>
+                </div>
+                <a href="#size-jersey" class="prod-link">Lihat Size Chart <i class="fas fa-arrow-down" style="font-size:.62rem;"></i></a>
+                <div class="prod-corner"></div>
+            </div>
+            <!-- Jersey Baseball -->
+            <div class="prod-card rv d1">
+                <div class="prod-ic-wrap"><i class="fas fa-baseball-ball" style="font-size:1.6rem;color:#E84E1B;"></i></div>
+                <h3 class="prod-name">Jersey Baseball</h3>
+                <p class="prod-desc">Jersey baseball model kancing atau raglan. Tersedia lengan panjang dan pendek.</p>
+                <div class="prod-tags">
+                    <span class="prod-tag">Polyester Premium</span>
+                    <span class="prod-tag">Model Kancing / Raglan</span>
+                    <span class="prod-tag">Lengan Panjang/Pendek</span>
+                    <span class="prod-tag">Full Custom Design</span>
+                </div>
+                <a href="#size-jersey" class="prod-link">Lihat Size Chart <i class="fas fa-arrow-down" style="font-size:.62rem;"></i></a>
+                <div class="prod-corner"></div>
+            </div>
+            <!-- Custom CTA -->
+            <div class="prod-cta rv d2">
+                <div class="lbl mb-4" style="color:#E84E1B;">Request Custom</div>
+                <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;">Punya Ide Lain?</h3>
+                <p style="color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.7;font-weight:300;margin-bottom:10px;">Hoodie &nbsp;·&nbsp; Jaket &nbsp;·&nbsp; Polo Shirt &nbsp;·&nbsp; Dan lainnya</p>
+                <p style="color:rgba(255,255,255,.38);font-size:.82rem;font-weight:300;margin-bottom:24px;">Ceritakan ide Anda melalui WhatsApp dan kami bantu wujudkan.</p>
+                <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="font-size:.7rem;padding:11px 22px;">
+                    <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+                </a>
+                <div style="position:absolute;top:0;right:0;width:160px;height:160px;background:radial-gradient(circle,rgba(232,78,27,.1),transparent);pointer-events:none;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SIZE CHARTS ═══ -->
+<section class="size-sec" id="size-kaos">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="rv mb-12">
+            <div class="lbl mb-5">Panduan Ukuran</div>
+            <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.02em;margin-bottom:12px;">Size Chart</h2>
+            <p style="color:#6b6b6b;font-weight:300;font-size:.95rem;">Pilih tab untuk melihat ukuran yang sesuai dengan produk Anda.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="rv d1" style="display:flex;flex-wrap:wrap;gap:1px;margin-bottom:32px;background:#e5e7eb;">
+            <button class="tab-btn active" onclick="showTab('kaos',this)">Kaos / T-Shirt</button>
+            <button class="tab-btn" onclick="showTab('jersey',this)" id="size-jersey-tab">Jersey &amp; Sportwear</button>
+        </div>
+
+        <!-- Kaos Table -->
+        <div class="tab-panel show rv d2" id="tab-kaos">
+            <div style="background:#fff;padding:8px;overflow-x:auto;">
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Lebar Dada (cm)</th>
+                            <th>Panjang (cm)</th>
+                            <th>Berat Badan (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>46–48</td><td>66–68</td><td>50–55</td></tr>
+                        <tr><td>M</td><td>48–50</td><td>68–70</td><td>55–65</td></tr>
+                        <tr><td>L</td><td>50–52</td><td>70–72</td><td>65–75</td></tr>
+                        <tr><td>XL</td><td>52–54</td><td>72–74</td><td>75–85</td></tr>
+                        <tr><td>XXL</td><td>54–56</td><td>74–76</td><td>85–95</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#9ca3af;font-size:.78rem;margin-top:12px;font-weight:300;">* Ukuran dapat berbeda ±1–2 cm tergantung bahan. Hubungi kami untuk konfirmasi.</p>
+        </div>
+
+        <!-- Jersey Table -->
+        <div class="tab-panel rv d2" id="tab-jersey">
+            <div style="background:#fff;padding:8px;overflow-x:auto;">
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Lebar Dada (cm)</th>
+                            <th>Panjang (cm)</th>
+                            <th>Tinggi Badan (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>48–50</td><td>68–70</td><td>160–165</td></tr>
+                        <tr><td>M</td><td>50–52</td><td>70–72</td><td>165–170</td></tr>
+                        <tr><td>L</td><td>52–54</td><td>72–74</td><td>170–175</td></tr>
+                        <tr><td>XL</td><td>54–56</td><td>74–76</td><td>175–180</td></tr>
+                        <tr><td>XXL</td><td>56–58</td><td>76–78</td><td>180+</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#9ca3af;font-size:.78rem;margin-top:12px;font-weight:300;">* Berlaku untuk jersey sepak bola, basket, baseball, dan kaos lengan panjang.</p>
+        </div>
+
+        <!-- Size note card -->
+        <div class="rv d3 mt-10" style="background:#111;padding:32px 36px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between;">
+            <div>
+                <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:#fff;margin-bottom:6px;">Ragu dengan ukuran?</h4>
+                <p style="color:rgba(255,255,255,.45);font-size:.85rem;font-weight:300;">Konsultasikan langsung dengan tim kami via WhatsApp.</p>
+            </div>
+            <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="flex-shrink:0;">
+                <i class="fab fa-whatsapp"></i> Tanya via WA
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#111;padding:64px 0 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-12" style="padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+                    <div style="width:30px;height:30px;background:#E84E1B;clip-path:polygon(0 0,100% 0,100% 76%,76% 100%,0 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-tshirt text-white" style="font-size:.68rem;"></i></div>
+                    <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;">IDEKU</span>
+                </div>
+                <p style="color:rgba(255,255,255,.3);font-size:.85rem;line-height:1.8;font-weight:300;">PT. Indo Duta Eka Kreasi Unik.<br>Digital printing textile sejak 2006.</p>
+            </div>
+            <div>
+                <h4 style="font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:18px;">Menu</h4>
+                <ul style="list-style:none;">
+                    <li style="margin-bottom:9px;"><a href="index.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Beranda</a></li>
+                    <li style="margin-bottom:9px;"><a href="produk.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Produk</a></li>
+                    <li><a href="kontak.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Kontak</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:18px;">Kontak</h4>
+                <ul style="list-style:none;">
+                    <li style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><i class="fab fa-whatsapp" style="color:#25D366;"></i><a href="https://wa.me/6282223338871" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">0822-2333-8871</a></li>
+                    <li style="display:flex;align-items:flex-start;gap:12px;"><i class="fas fa-map-marker-alt" style="color:#E84E1B;font-size:.8rem;margin-top:3px;"></i><span style="color:rgba(255,255,255,.5);font-size:.875rem;font-weight:300;">Kelapa Gading, Jakarta Utara</span></li>
+                </ul>
+            </div>
+        </div>
+        <div style="padding:24px 0;text-align:center;">
+            <p style="color:rgba(255,255,255,.18);font-size:.78rem;">&copy; 2024 IDEKU — PT. Indo Duta Eka Kreasi Unik</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WA Float -->
+<div class="wa-f">
+    <a href="https://wa.me/6282223338871" target="_blank" title="Chat WhatsApp IDEKU">
+        <i class="fab fa-whatsapp text-white" style="font-size:1.4rem;"></i>
+    </a>
+</div>
+
+<script>
+    // Mobile menu
+    document.getElementById('ham').addEventListener('click', () => document.getElementById('mob-menu').classList.toggle('open'));
+
+    // Size tabs
+    function showTab(id, btn) {
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('show'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + id).classList.add('show');
+        btn.classList.add('active');
+    }
+
+    // Handle anchor links to size sections
+    const hash = window.location.hash;
+    if (hash === '#size-jersey') {
+        const jerseyTab = document.querySelector('[onclick*="jersey"]');
+        if (jerseyTab) showTab('jersey', jerseyTab);
+    }
+
+    // Scroll reveal
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.07 });
+    document.querySelectorAll('.rv').forEach(r => io.observe(r));
+</script>
+</body>
+</html>

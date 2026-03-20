@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - IDEKU | WhatsApp & Alamat</title>
+    <meta name="description" content="Hubungi IDEKU via WhatsApp 0822-2333-8871. Jl. Boulevard Barat Blok A4 No. 89, Kelapa Gading, Jakarta Utara.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: #111; background: #fff; -webkit-font-smoothing: antialiased; }
+
+        /* Nav */
+        nav { background: rgba(255,255,255,.97); box-shadow: 0 1px 24px rgba(0,0,0,.06); }
+        .nav-lnk { font-family: 'Syne', sans-serif; font-weight: 600; font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; position: relative; text-decoration: none; color: #6b6b6b; transition: color .25s; }
+        .nav-lnk::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #E84E1B; transition: width .3s; }
+        .nav-lnk:hover::after, .nav-lnk.act::after { width: 100%; }
+        .nav-lnk.act { color: #E84E1B; }
+
+        /* Hero */
+        .page-hero { background: #111; padding: 130px 0 72px; background-image: radial-gradient(ellipse at 30% 60%, rgba(232,78,27,.12) 0%, transparent 55%); }
+
+        /* Label */
+        .lbl { font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #E84E1B; display: flex; align-items: center; gap: 10px; }
+        .lbl::before { content: ''; display: block; width: 28px; height: 2px; background: #E84E1B; }
+
+        /* Btn */
+        .btn-e { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; background: #E84E1B; color: #fff; padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+        .btn-e:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232,78,27,.38); }
+        .btn-wa { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; background: #25D366; color: #fff; padding: 16px 36px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; transition: transform .25s, box-shadow .25s; border-radius: 2px; }
+        .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(37,211,102,.4); }
+
+        /* Contact info card */
+        .info-card { background: #FBF8F4; padding: 48px 44px; }
+        .info-row { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,.06); }
+        .info-row:first-child { padding-top: 0; }
+        .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .info-ic { width: 44px; height: 44px; background: rgba(232,78,27,.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .3s; }
+        .info-row:hover .info-ic { background: rgba(232,78,27,.14); }
+        .info-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .82rem; color: #111; margin-bottom: 4px; letter-spacing: .04em; }
+        .info-val { color: #6b6b6b; font-size: .9rem; line-height: 1.7; font-weight: 300; }
+
+        /* Map card */
+        .map-card { background: #f5f5f5; overflow: hidden; }
+
+        /* Hours table */
+        .hours-table { width: 100%; border-collapse: collapse; }
+        .hours-table td { padding: 10px 0; font-size: .875rem; border-bottom: 1px solid rgba(0,0,0,.05); }
+        .hours-table td:first-child { color: #111; font-weight: 500; }
+        .hours-table td:last-child { color: #6b6b6b; text-align: right; font-weight: 300; }
+        .hours-table tr:last-child td { border-bottom: none; }
+
+        /* Reveal */
+        .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+        .rv.in { opacity: 1; transform: none; }
+        .d1 { transition-delay: .12s; } .d2 { transition-delay: .24s; }
+
+        /* Mobile menu */
+        #mob-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .35s ease, opacity .35s ease; }
+        #mob-menu.open { max-height: 360px; opacity: 1; }
+
+        /* WA float */
+        .wa-f { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+        .wa-f a { width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(37,211,102,.42); transition: transform .25s; text-decoration: none; animation: wa-pulse 3s ease-in-out infinite; }
+        .wa-f a:hover { transform: scale(1.1); }
+        @keyframes wa-pulse { 0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,.42); } 50% { box-shadow: 0 4px 36px rgba(37,211,102,.68); } }
+
+        /* Marquee */
+        .mq-wrap { overflow: hidden; }
+        .mq-track { display: flex; gap: 3rem; width: max-content; animation: mq 26s linear infinite; }
+        @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .mq-item { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+        .mq-dot { color: rgba(255,255,255,.35); }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center" style="height:72px;">
+            <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+                <div style="width:32px;height:32px;background:#E84E1B;clip-path:polygon(0 0,100% 0,100% 76%,76% 100%,0 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="fas fa-tshirt text-white" style="font-size:.72rem;"></i>
+                </div>
+                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:#111;">IDEKU</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="nav-lnk">Beranda</a>
+                <a href="produk.html" class="nav-lnk">Produk</a>
+                <a href="kontak.html" class="nav-lnk act">Kontak</a>
+                <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="font-size:.68rem;padding:9px 18px;">
+                    <i class="fab fa-whatsapp"></i>Chat
+                </a>
+            </div>
+            <button id="ham" class="md:hidden flex flex-col gap-1.5 p-2 border-0 bg-transparent cursor-pointer">
+                <span style="display:block;width:24px;height:2px;background:#111;"></span>
+                <span style="display:block;width:24px;height:2px;background:#111;"></span>
+                <span style="display:block;width:16px;height:2px;background:#111;"></span>
+            </button>
+        </div>
+    </div>
+    <div id="mob-menu" style="background:#fff;border-top:1px solid #f0f0f0;">
+        <div class="px-6 py-5">
+            <a href="index.html" style="display:block;font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#6b6b6b;padding:11px 0;text-decoration:none;">Beranda</a>
+            <a href="produk.html" style="display:block;font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#6b6b6b;padding:11px 0;text-decoration:none;">Produk</a>
+            <a href="kontak.html" style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#E84E1B;padding:11px 0;text-decoration:none;">Kontak</a>
+            <a href="https://wa.me/6282223338871" target="_blank" class="btn-e" style="margin-top:16px;justify-content:center;width:100%;">
+                <i class="fab fa-whatsapp"></i> Chat WhatsApp
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="lbl mb-5">Hubungi Kami</div>
+        <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,6vw,4.5rem);color:#fff;letter-spacing:-.025em;line-height:1.05;margin-bottom:16px;">
+            Siap Mewujudkan<br>Ide Kreatif Anda
+        </h1>
+        <p style="color:rgba(255,255,255,.45);font-size:1rem;font-weight:300;max-width:440px;line-height:1.8;">
+            Konsultasikan kebutuhan produksi pakaian custom Anda langsung dengan tim IDEKU.
+        </p>
+    </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq-wrap" style="background:#E84E1B;padding:13px 0;">
+    <div class="mq-track">
+        <span class="mq-item">WhatsApp 0822-2333-8871</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Kelapa Gading Jakarta Utara</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Buka Senin – Sabtu</span><span class="mq-dot">◆</span>
+        <span class="mq-item">08.00 – 17.00 WIB</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Respon Cepat</span><span class="mq-dot">◆</span>
+        <!-- dup -->
+        <span class="mq-item">WhatsApp 0822-2333-8871</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Kelapa Gading Jakarta Utara</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Buka Senin – Sabtu</span><span class="mq-dot">◆</span>
+        <span class="mq-item">08.00 – 17.00 WIB</span><span class="mq-dot">◆</span>
+        <span class="mq-item">Respon Cepat</span><span class="mq-dot">◆</span>
+    </div>
+</div>
+
+<!-- ═══ CONTACT SECTION ═══ -->
+<section style="padding:80px 0;background:#fff;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- Info column -->
+            <div class="lg:col-span-5">
+                <div class="info-card rv" style="height:100%;">
+                    <div class="lbl mb-6">Informasi Kontak</div>
+
+                    <!-- WhatsApp -->
+                    <div class="info-row">
+                        <div class="info-ic"><i class="fab fa-whatsapp" style="color:#25D366;font-size:1.1rem;"></i></div>
+                        <div>
+                            <div class="info-label">WhatsApp</div>
+                            <div class="info-val">
+                                <a href="https://wa.me/6282223338871" style="color:#E84E1B;text-decoration:none;font-weight:500;">0822-2333-8871</a><br>
+                                <span style="font-size:.82rem;color:#9ca3af;">Respon cepat via chat</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="info-row">
+                        <div class="info-ic"><i class="fas fa-map-marker-alt" style="color:#E84E1B;font-size:1rem;"></i></div>
+                        <div>
+                            <div class="info-label">Alamat</div>
+                            <div class="info-val">
+                                Jl. Boulevard Barat Blok A4 No. 89<br>
+                                Kelapa Gading, Jakarta Utara
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hours -->
+                    <div class="info-row">
+                        <div class="info-ic"><i class="fas fa-clock" style="color:#E84E1B;font-size:.95rem;"></i></div>
+                        <div style="width:100%;">
+                            <div class="info-label">Jam Operasional</div>
+                            <table class="hours-table" style="margin-top:10px;">
+                                <tr><td>Senin – Jumat</td><td>08.00 – 17.00 WIB</td></tr>
+                                <tr><td>Sabtu</td><td>08.00 – 15.00 WIB</td></tr>
+                                <tr><td>Minggu</td><td style="color:#E84E1B;">Tutup</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- WA CTA -->
+                    <div style="margin-top:32px;">
+                        <a href="https://wa.me/6282223338871" target="_blank" class="btn-wa" style="width:100%;justify-content:center;">
+                            <i class="fab fa-whatsapp" style="font-size:1.1rem;"></i>
+                            Chat WhatsApp Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map column -->
+            <div class="lg:col-span-7 rv d1">
+                <div class="map-card" style="height:100%;min-height:480px;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322066!2d106.89476147454945!3d-6.157506993829946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5de3c8b2e4f%3A0x1c7bf1c8d8f00000!2sKelapa%20Gading%2C%20Jakarta%20Utara!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                        width="100%" height="100%" style="border:0;display:block;min-height:480px;"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FAQ STRIP ═══ -->
+<section style="padding:64px 0;background:#FBF8F4;background-image:linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);background-size:48px 48px;">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="rv text-center mb-12">
+            <div class="lbl mb-4" style="justify-content:center;">FAQ</div>
+            <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em;">Pertanyaan Umum</h2>
+        </div>
+        <div class="rv d1">
+            <div style="display:grid;gap:1px;background:#e5e7eb;">
+                <div style="background:#fff;padding:24px 28px;">
+                    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:8px;">Berapa minimum order?</h4>
+                    <p style="color:#6b6b6b;font-size:.875rem;font-weight:300;line-height:1.7;">Tidak ada minimum order yang ketat. Hubungi kami via WhatsApp untuk info lebih lanjut sesuai kebutuhan Anda.</p>
+                </div>
+                <div style="background:#fff;padding:24px 28px;">
+                    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:8px;">Berapa lama waktu produksi?</h4>
+                    <p style="color:#6b6b6b;font-size:.875rem;font-weight:300;line-height:1.7;">Tergantung jumlah dan kompleksitas desain. Biasanya 5–14 hari kerja. Diskusikan deadline Anda dengan kami.</p>
+                </div>
+                <div style="background:#fff;padding:24px 28px;">
+                    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:8px;">Bagaimana cara memesan?</h4>
+                    <p style="color:#6b6b6b;font-size:.875rem;font-weight:300;line-height:1.7;">Hubungi via WhatsApp, kirim desain dan detail kebutuhan Anda. Tim kami akan memandu proses selanjutnya.</p>
+                </div>
+                <div style="background:#fff;padding:24px 28px;">
+                    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:8px;">Apakah bisa kirim ke luar kota?</h4>
+                    <p style="color:#6b6b6b;font-size:.875rem;font-weight:300;line-height:1.7;">Ya, kami melayani pengiriman ke seluruh Indonesia. Biaya pengiriman ditanggung pembeli.</p>
+                </div>
+            </div>
+        </div>
+        <div class="rv d2 text-center mt-10">
+            <p style="color:#6b6b6b;font-size:.875rem;font-weight:300;margin-bottom:20px;">Masih ada pertanyaan lain?</p>
+            <a href="https://wa.me/6282223338871" target="_blank" class="btn-wa">
+                <i class="fab fa-whatsapp"></i> Tanya Langsung via WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#111;padding:64px 0 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-12" style="padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+                    <div style="width:30px;height:30px;background:#E84E1B;clip-path:polygon(0 0,100% 0,100% 76%,76% 100%,0 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-tshirt text-white" style="font-size:.68rem;"></i></div>
+                    <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;">IDEKU</span>
+                </div>
+                <p style="color:rgba(255,255,255,.3);font-size:.85rem;line-height:1.8;font-weight:300;">PT. Indo Duta Eka Kreasi Unik.<br>Digital printing textile sejak 2006.</p>
+            </div>
+            <div>
+                <h4 style="font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:18px;">Menu</h4>
+                <ul style="list-style:none;">
+                    <li style="margin-bottom:9px;"><a href="index.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Beranda</a></li>
+                    <li style="margin-bottom:9px;"><a href="produk.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Produk</a></li>
+                    <li><a href="kontak.html" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Kontak</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:18px;">Kontak</h4>
+                <ul style="list-style:none;">
+                    <li style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><i class="fab fa-whatsapp" style="color:#25D366;"></i><a href="https://wa.me/6282223338871" style="color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">0822-2333-8871</a></li>
+                    <li style="display:flex;align-items:flex-start;gap:12px;"><i class="fas fa-map-marker-alt" style="color:#E84E1B;font-size:.8rem;margin-top:3px;"></i><span style="color:rgba(255,255,255,.5);font-size:.875rem;font-weight:300;">Kelapa Gading, Jakarta Utara</span></li>
+                </ul>
+            </div>
+        </div>
+        <div style="padding:24px 0;text-align:center;">
+            <p style="color:rgba(255,255,255,.18);font-size:.78rem;">&copy; 2024 IDEKU — PT. Indo Duta Eka Kreasi Unik</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WA Float -->
+<div class="wa-f">
+    <a href="https://wa.me/6282223338871" target="_blank" title="Chat WhatsApp IDEKU">
+        <i class="fab fa-whatsapp text-white" style="font-size:1.4rem;"></i>
+    </a>
+</div>
+
+<script>
+    document.getElementById('ham').addEventListener('click', () => document.getElementById('mob-menu').classList.toggle('open'));
+
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.07 });
+    document.querySelectorAll('.rv').forEach(r => io.observe(r));
+</script>
+</body>
+</html>
